@@ -39,20 +39,20 @@ class ProtocolModelTest {
     }
 
     @Test
-    void Dado_um_objeto_instanciado_valido_Quando_atribuido_um_valor_nulo_Entao_nao_deve_lancar_exception(){
+    void Dado_um_objeto_instanciado_Quando_atribuido_um_valor_nulo_Entao_nao_deve_lancar_exception(){
         Set<ConstraintViolation<ProtocolModel>> validate = validator.validate(protocolModel);
         assertFalse(validate.isEmpty());
     }
 
     @Test
-    void Dado_um_objeto_instanciado_valido_Quando_atribuido_um_valor_nulo_Entao_deve_lancar_exception(){
+    void Dado_um_objeto_instanciado_Quando_atribuido_um_valor_nulo_Entao_deve_lancar_exception(){
         protocolModel.setDate(null);
         Set<ConstraintViolation<ProtocolModel>> validate = validator.validate(protocolModel);
         assertTrue(!validate.isEmpty());
     }
 
     @Test
-    void Dado_um_objeto_instanciado_valido_Quando_atribuido_o_hash_Entao_deve_conter_sessenta_e_quatro_digitos(){
+    void Dado_um_objeto_instanciado_Quando_atribuido_o_hash_Entao_deve_conter_sessenta_e_quatro_digitos(){
         protocolModel.setHash("9179ec02b930c1bd44744d784680b21f6ebcb4c1fccbfe1a5bc0f64df7559d585649874");
         protocolModel.setCompany(
                 new CompanyModel(4010,"90102748374658")
