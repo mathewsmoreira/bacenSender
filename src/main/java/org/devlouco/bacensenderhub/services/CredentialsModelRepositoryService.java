@@ -5,6 +5,7 @@ import org.devlouco.bacensenderhub.repositories.CredentialsModelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CredentialsModelRepositoryService {
@@ -13,18 +14,21 @@ public class CredentialsModelRepositoryService {
 
 
     public CredentialsModel save(CredentialsModel credentialsModel) {
+        Objects.requireNonNull(credentialsModel);
         return credentialsModelRepository.save(credentialsModel);
     }
 
     public CredentialsModel update(CredentialsModel credentialsModel) {
+        Objects.requireNonNull(credentialsModel);
         return credentialsModelRepository.save(credentialsModel);
     }
 
-    public CredentialsModel getCredentialsModel( CredentialsModel credentialsModel ) {
+    public CredentialsModel findCredentialsById(CredentialsModel credentialsModel ) {
+        Objects.requireNonNull(credentialsModel);
         return credentialsModelRepository.findById(credentialsModel.getID()).orElse(null);
     }
 
-    public List<CredentialsModel> getAllCredentialsModels() {
+    public List<CredentialsModel> findAllCredentials() {
         return credentialsModelRepository.findAll();
     }
 
