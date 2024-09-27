@@ -87,12 +87,12 @@ class ProtocolModelRepositoryServiceTest {
     }
 
     @Test
-    void Dado_uma_entidade_valida_Quando_feito_o_findProtocolbyId_Entao_deve_retornar_a_entidade(){
+    void Dado_uma_entidade_valida_Quando_feito_o_findById_Entao_deve_retornar_a_entidade(){
         when(repo.findById(anyLong())).thenReturn(
                 Optional.of(protocolModel)
         );
 
-        ProtocolModel update = service.findProtocolbyId(protocolModel);
+        ProtocolModel update = service.findById(protocolModel.getID()).orElse(null);
         assertAll(
                 ()->{
                     assertNotNull(update);
@@ -108,7 +108,7 @@ class ProtocolModelRepositoryServiceTest {
                 List.of(protocolModel)
         );
 
-        List<ProtocolModel> all = service.findAllProtocol();
+        List<ProtocolModel> all = service.findAll();
         assertAll(
                 ()->{
                     assertNotNull(all);

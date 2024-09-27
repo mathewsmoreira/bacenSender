@@ -21,18 +21,17 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CompanyModelRepositoryServiceTest {
 
-
-    @InjectMocks
-    private CompanyModelRepositoryService service;
     @Mock
     private CompanyModelRepository repo;
+    @InjectMocks
+    private CompanyModelRepositoryService service;
+
     private CompanyModel companyModel;
     private CredentialsModel credentialsModel;
 
     @BeforeEach
     void setUp() {
 
-        MockitoAnnotations.openMocks(this);
         credentialsModel = mock(CredentialsModel.class);
 
         companyModel = new CompanyModel(1l,9010,"90203020102019",credentialsModel);
@@ -75,7 +74,7 @@ class CompanyModelRepositoryServiceTest {
                 Optional.of(companyModel)
         );
 
-        CompanyModel byId = service.findById(companyModel);
+        CompanyModel byId = service.findById(companyModel.getID()).orElse(null);
         assertAll(
                 ()->{
                     assertNotNull(byId);

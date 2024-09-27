@@ -75,12 +75,12 @@ class CredentialsModelRepositoryServiceTest {
     }
 
     @Test
-    void Dado_uma_entidade_valida_Quando_feito_o_getCredentialsModel_Entao_deve_retornar_a_entidade(){
+    void Dado_uma_entidade_valida_Quando_feito_o_findByID_Entao_deve_retornar_a_entidade(){
         when(repo.findById(anyLong())).thenReturn(
                 Optional.of(credentialsModel)
         );
 
-        CredentialsModel update = service.findCredentialsById(credentialsModel);
+        CredentialsModel update = service.findById(credentialsModel.getID()).orElse(null);
         assertAll(
                 ()->{
                     assertNotNull(update);
@@ -96,7 +96,7 @@ class CredentialsModelRepositoryServiceTest {
                 List.of(credentialsModel)
         );
 
-        List<CredentialsModel> all = service.findAllCredentials();
+        List<CredentialsModel> all = service.findAll();
         assertAll(
                 ()->{
                     assertNotNull(all);
