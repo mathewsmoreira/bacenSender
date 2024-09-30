@@ -37,6 +37,44 @@ public class CompanyModel {
     @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
     private CredentialsModel credentials;
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public final static class Builder{
+
+        private Long ID;
+        private int coop;
+        private String cnpj;
+        private CredentialsModel credentials;
+
+        public Builder withID(Long ID){
+            this.ID = ID;
+            return this;
+        }
+
+
+        public Builder withCoop(int coop){
+            this.coop = coop;
+            return this;
+        }
+
+        public Builder withCnpj(String cnpj){
+            this.cnpj = cnpj;
+            return this;
+        }
+
+        public Builder withCredentials(CredentialsModel credentials){
+            this.credentials = credentials;
+            return this;
+        }
+
+        public CompanyModel build(){
+            return new CompanyModel(this.ID,this.coop,this.cnpj,this.credentials);
+        }
+
+    }
+
 
 
 }

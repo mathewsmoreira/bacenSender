@@ -89,6 +89,38 @@ public class ProtocolResponseModel {
         this.companyModel = companyModel;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public final static class Builder{
+
+        private Long ID;
+        private String protocol;
+        private LinkResponseModel linkContent;
+        private CompanyModel companyModel;
+
+        public Builder withID(Long ID) {
+            this.ID = ID;
+            return this;
+        }
+        public Builder withProtocol(String protocol) {
+            this.protocol = protocol;
+            return this;
+        }
+        public Builder withLinkContent(LinkResponseModel linkContent) {
+            this.linkContent = linkContent;
+            return this;
+        }
+        public Builder withCompanyModel(CompanyModel companyModel) {
+            this.companyModel = companyModel;
+            return this;
+        }
+        public ProtocolResponseModel build() {
+            return new ProtocolResponseModel(ID, protocol, linkContent, companyModel);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

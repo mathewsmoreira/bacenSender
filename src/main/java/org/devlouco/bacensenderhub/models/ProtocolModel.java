@@ -157,12 +157,81 @@ public class ProtocolModel {
         this.filesBytes = filesBytes;
     }
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public final static class Builder {
+
+
+        private Long ID;
+        private LocalDate date;
+        private String idetification;
+        private String hash;
+        private long size;
+        private String docName;
+        private String observation;
+        private String recipient;
+        private CompanyModel company;
+        private byte filesBytes[];
+
+        public Builder withID(Long ID) {
+            this.ID = ID;
+            return this;
+        }
+        public Builder withDate(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+        public Builder withIdetification(String idetification) {
+            this.idetification = idetification;
+            return this;
+        }
+        public Builder withHash(String hash) {
+            this.hash = hash;
+            return this;
+        }
+        public Builder withSize(long size) {
+            this.size = size;
+            return this;
+        }
+        public Builder withDocName(String docName) {
+            this.docName = docName;
+            return this;
+        }
+        public Builder withObservation(String observation) {
+            this.observation = observation;
+            return this;
+        }
+        public Builder withRecipient(String recipient) {
+            this.recipient = recipient;
+            return this;
+        }
+        public Builder withCompany(CompanyModel company) {
+            this.company = company;
+            return this;
+        }
+        public Builder withFilesBytes(byte[] filesBytes) {
+            this.filesBytes = filesBytes;
+            return this;
+        }
+
+        public ProtocolModel build() {
+            return new ProtocolModel(
+                   ID,date,idetification,hash,size,docName,observation,recipient,company,filesBytes
+            );
+        }
+
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ProtocolModel that)) return false;
         return Objects.equals(ID, that.ID);
     }
+
 
     @Override
     public int hashCode() {
@@ -184,4 +253,6 @@ public class ProtocolModel {
                 ", filesBytes=" + Arrays.toString(filesBytes) +
                 '}';
     }
+
+
 }
