@@ -1,0 +1,30 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPathPattern": "/staws/arquivos/",
+        "headers": {
+          "Content-Type": {
+            "equalTo": "application/xml"
+          },
+          "Authorization": {
+            "equalTo": "Basic dGVzdGU6dGVzdGU="
+          }
+        },
+        "bodyPatterns": [
+          {
+            "equalToXml": "<Parametros>\n<IdentificadorDocumento>4010</IdentificadorDocumento>\n<Hash>9179ec02b930c1bd44744d784680b21f6ebcb4c1fccbfe1a5bc0f64df7559d58</Hash>\n<Tamanho>256</Tamanho>\n<NomeArquivo>teste.zip</NomeArquivo>\n<Observacao></Observacao>\n<Destinatarios></Destinatarios>\n</Parametros>"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/xml"
+        },
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Resultado xmlns:atom=\"http://www.w3.org/2005/Atom\">\n<Protocolo>90108045</Protocolo>\n<atom:link href=\"https://{host}/staws/arquivos/{protocolo}/conteudo\"\nrel=\"conteudo\" type=\"application/octet-stream\" />\n</Resultado>"
+      }
+    }
+  ]
+}
