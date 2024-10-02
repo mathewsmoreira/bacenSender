@@ -21,7 +21,7 @@ public class HeaderFileUpload implements BacenHeader{
     public HttpHeaders getHeader(CredentialsModel credentialsModel) {
         headers = new HttpHeaders();
         headers.add("Authorization", basicAuth.createBasicAuthHeader(credentialsModel));
-        headers.add("Content-Type", "application/xml");
+        headers.add("Content-Type", "application/octet-stream");
 
         return headers;
     }
