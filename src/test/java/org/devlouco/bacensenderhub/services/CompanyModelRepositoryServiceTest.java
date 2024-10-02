@@ -3,6 +3,7 @@ package org.devlouco.bacensenderhub.services;
 import org.devlouco.bacensenderhub.models.CompanyModel;
 import org.devlouco.bacensenderhub.models.CredentialsModel;
 import org.devlouco.bacensenderhub.repositories.CompanyModelRepository;
+import org.devlouco.bacensenderhub.util.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,87 +21,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CompanyModelRepositoryServiceTest {
+class CompanyModelRepositoryServiceTest extends GenericCrudServiceTest < CompanyModel, Long>{
 
     @Mock
-    private CompanyModelRepository repo;
-    @InjectMocks
-    private CompanyModelRepositoryService service;
+    private CompanyModelRepository repository;
 
-    private CompanyModel companyModel;
     private CredentialsModel credentialsModel;
+
+
+    @Override
+    protected CompanyModel createEntity() {
+
+        return TestDataFactory.createCompanyModel().build();
+
+    }
 
     @BeforeEach
     void setUp() {
-
-        credentialsModel = mock(CredentialsModel.class);
-
-        companyModel = new CompanyModel(1l,9010,"90203020102019",credentialsModel);
-
-
-
+        super.setUp();
+        genericCrudService = new CompanyModelRepositoryService(repository);
+        jpaRepository = repository;
+        id = 1l;
     }
 
-    @Test
-    void Dado_uma_entidade_valida_Quando_salvar_Entao_salva_a_entidade(){
-        when(repo.save(any(CompanyModel.class))).thenReturn(
-                companyModel
-        );
-
-        assertEquals(companyModel, service.save(companyModel));
-    }
-
-    @Test
-    void Dado_uma_entidade_valida_Quando_tentar_salvar_nulo_Entao_deve_lancar_exception(){
-        assertThrows(NullPointerException.class, () -> service.save(null));
-       verify(repo, never()).save(any(CompanyModel.class));
-    }
-
-    @Test
-    void Dado_uma_entidade_valida_Quando_feito_update_Entao_retorna_a_entidade(){
-        when(repo.save(any(CompanyModel.class))).thenReturn(
-                companyModel
-        );
-
-        CompanyModel update = service.update(companyModel);
-
-        assertEquals(companyModel, update);
-        verify(repo, times(1)).save(any(CompanyModel.class));
-
-    }
-
-    @Test
-    void Dado_uma_entidade_valida_Quando_chamado_findById_Entao_retorna_uma_entidade(){
-        when(repo.findById(anyLong())).thenReturn(
-                Optional.of(companyModel)
-        );
-
-        CompanyModel byId = service.findById(companyModel.getID()).orElse(null);
-        assertAll(
-                ()->{
-                    assertNotNull(byId);
-                    assertEquals(companyModel, byId);
-                    verify(repo, times(1)).findById(anyLong());
-                }
-        );
-
-
-    }
-
-    @Test
-    void Dado_uma_entidade_valida_Quando_chamado_findAll_Entao_retorna_uma_lista_de_entidade(){
-        when(repo.findAll()).thenReturn(
-                List.of(companyModel)
-        );
-
-        List<CompanyModel> all = service.findAll();
-        assertAll(
-                ()->{
-                    assertNotNull(all);
-                    assertEquals(1, all.size());
-                    verify(repo, times(1)).findAll();
-                }
-        );
-    }
 
 }
